@@ -1,3 +1,4 @@
+*,
 *::after,
 *::before {
   box-sizing: border-box;
@@ -5,6 +6,7 @@
 
 :root {
   --cell-size: 100px;
+  --mark-size: calc((var(--cell-size) * 0.9));
 }
 
 body {
@@ -16,14 +18,53 @@ body {
   height: 100vh;
   display: grid;
   justify-content: center;
+  align-content: center;
+  justify-items: center;
   align-items: center;
   grid-template-columns: repeat(3, auto);
-  background-color: black;
 }
 
 .cell {
   width: var(--cell-size);
   height: var(--cell-size);
-  background-color: gray;
-  border: 1px solid white;
+  border: 1px solid rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+  border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+  border-bottom: none;
+}
+
+.cell.x::before,
+.cell.x::after {
+  content: "";
+  width: calc(var(--mark-size) * 0.15);
+  height: var(--mark-size);
+  background-color: black;
+}
+
+.cell.x::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after {
+  transform: rotate(-45deg);
 }
